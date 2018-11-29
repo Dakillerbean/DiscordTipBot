@@ -3,5 +3,6 @@
 "tip help":"tiphelp",
 "nebltip":"tipnebl",
 "tipbot":"tipnebl",
-"tipbot help":"tiphelp"
+"tipbot help":"tiphelp",
+"tipbot tip":"tipnebl"
 }
