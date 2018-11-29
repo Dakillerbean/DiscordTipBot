@@ -1,12 +1,7 @@
 {
-"rvntip":"tiprvn",
-"dogetip":"tipdoge",
-"lbctip":"tiplbc",
-"protontip":"tipproton",
-"ufotip":"tipufo",
-"pxctip":"tippxc",
-"ftctip":"tipftc",
-"vtltip": "tipvtl",
 "tip":"tiphelp",
-"tip help":"tiphelp"
+"tip help":"tiphelp",
+"nebltip":"tipnebl",
+"tipbot":"tipnebl",
+"tipbot help":"tiphelp"
 }

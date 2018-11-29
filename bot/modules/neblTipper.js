@@ -25,7 +25,7 @@ exports.tipnebl = {
       subcommand = words.length >= 2 ? words[1] : 'help',
       helpmsg =
         '__**Neblio (NEBL) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipnebl** : Displays This Message\n    **!tipnebl balance** : get your balance\n    **!tipnebl deposit** : get address for your deposits\n    **!tipnebl withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipnebl <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipnebl private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
-      channelwarning = 'Please use <#bot-spam> or DMs to talk to bots.';
+      channelwarning = 'Please use <#tipbottest> or DMs to talk to TipBot.';
     switch (subcommand) {
       case 'help':
         privateorSpamChannel(msg, channelwarning, doHelp, [helpmsg]);
