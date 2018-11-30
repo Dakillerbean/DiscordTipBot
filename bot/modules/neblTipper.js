@@ -46,6 +46,9 @@ exports.tipbot = {
       case 'price':
         doPrice(msg);
         break;
+      case 'stats':
+        doStats(msg);
+        break;
       default:
         doHelp(msg, helpmsg);
     }
@@ -92,6 +95,23 @@ function doPrice(message) {
       btcarrow = " :arrow_double_down: "
     }
     message.channel.send('The current price of NEBL <:nebl:517893431058497542> is: $' + priceusd + ' ' + usdarrow + usdchange + '%  -  ' + pricebtc + 'BTC <:bitcoin:517893081693945880> ' + btcarrow + btcchange + '%');
+  });
+}
+
+function doStats(message) {
+  var checkprice = get_json("https://api.coinmarketcap.com/v2/ticker/1955/?convert=BTC", function (resp) {
+  	var priceusd  = parseFloat(resp.data.quotes.USD.price).toFixed(2);
+  	var position  = resp.data.rank;
+	var volume    = resp.data.quotes.USD.volume_24h;
+	var marketcap = resp.data.quotes.USD.market_cap;
+
+    var vol = volume.toString().split(".");
+    var mc  = marketcap.toString().split(".");
+
+    vol[0] = vol[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    mc[0]  = mc[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    message.channel.send('NEBL <:nebl:517893431058497542> is: $' + priceusd + ', rank ' + position + ' with a Market Cap of $' + mc[0] + ' and a 24Hr Volume of $' + vol[0]);
   });
 }
 
