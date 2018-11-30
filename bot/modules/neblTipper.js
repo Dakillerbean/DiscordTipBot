@@ -9,11 +9,11 @@ let walletConfig = config.get('nebl').config;
 let paytxfee = config.get('nebl').paytxfee;
 const nebl = new bitcoin.Client(walletConfig);
 
-exports.commands = ['tipnebl'];
-exports.tipnebl = {
+exports.commands = ['tipbot'];
+exports.tipbot = {
   usage: '<subcommand>',
   description:
-    '__**Neblio (NEBL) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipnebl** : Displays This Message\n    **!tipnebl balance** : get your balance\n    **!tipnebl deposit** : get address for your deposits\n    **!tipnebl withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipnebl <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipnebl private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    has a default txfee of ' + paytxfee,
+    '__**Neblio (NEBL) TipBot**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbot** : Displays This Message\n    **!tipbot balance** : get your balance\n    **!tipbot deposit** : get address for your deposits\n    **!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbot tip private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    has a default txfee of ' + paytxfee,
   process: async function(bot, msg, suffix) {
     let tipper = msg.author.id.replace('!', ''),
       words = msg.content
@@ -24,7 +24,7 @@ exports.tipnebl = {
         }),
       subcommand = words.length >= 2 ? words[1] : 'help',
       helpmsg =
-        '__**Neblio (NEBL) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipnebl** : Displays This Message\n    **!tipnebl balance** : get your balance\n    **!tipnebl deposit** : get address for your deposits\n    **!tipnebl withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipnebl <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipnebl private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
+        '__**Neblio (NEBL) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbot** : Displays This Message\n    **!tipbot balance** : get your balance\n    **!tipbot deposit** : get address for your deposits\n    **!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbot tip private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
       channelwarning = 'Please use <#tipbot> or DMs to talk to TipBot.';
     switch (subcommand) {
       case 'help':
@@ -39,8 +39,11 @@ exports.tipnebl = {
       case 'withdraw':
         privateorSpamChannel(msg, channelwarning, doWithdraw, [tipper, words, helpmsg]);
         break;
-      default:
+      case 'tip':
         doTip(bot, msg, tipper, words, helpmsg);
+        break;
+      default:
+        doHelp(msg, helpmsg);
     }
   }
 };
@@ -171,15 +174,11 @@ function doWithdraw(message, tipper, words, helpmsg) {
 }
 
 function doTip(bot, message, tipper, words, helpmsg) {
-  if (words.length < 3 || !words) {
-    doHelp(message, helpmsg);
-    return;
-  }
   var prv = false;
-  var amountOffset = 2;
-  if (words.length >= 4 && words[1] === 'private') {
+  var amountOffset = 3;
+  if (words.length >= 4 && words[2] === 'private') {
     prv = true;
-    amountOffset = 3;
+    amountOffset = 4;
   }
 
   let amount = getValidatedAmount(words[amountOffset]);
@@ -288,7 +287,7 @@ function sendNEBL(bot, message, tipper, recipient, amount, privacyFlag) {
                 ]
               } });
                   if (
-                    message.content.startsWith('!tipnebl private ')
+                    message.content.startsWith('!tipbot tip private ')
                   ) {
                     message.delete(1000); //Supposed to delete message
                   }

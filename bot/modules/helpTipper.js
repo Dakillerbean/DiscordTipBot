@@ -9,18 +9,18 @@ exports.tiphelp = {
     message.author.send(
       '  **Neblio (NEBL) Tipper**\n    Transaction Fees: **' + neblioFee + '**\n' +
       '__**Commands**__\n' +
-      '  **!tipnebl** : Displays This Message\n' +
-      '  **!tipnebl balance** : get your balance\n' +
-      '  **!tipnebl deposit** : get address for your deposits\n' +
-      '  **!tipnebl withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n' +
-      '  **!tipnebl <@user> <amount>** :mention a user with @ and then the amount to tip them\n' +
-      '  **!tipnebl private <@user> <amount>** : put private before Mentioning a user to tip them privately\n' +
+      '  **!tipbot** : Displays This Message\n' +
+      '  **!tipbot balance** : get your balance\n' +
+      '  **!tipbot deposit** : get address for your deposits\n' +
+      '  **!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n' +
+      '  **!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n' +
+      '  **!tipbot tip private <@user> <amount>** : put private before Mentioning a user to tip them privately\n' +
       '__**Examples**__\n' +
-      '  **!tipnebl @nebliodev 10**\n' +
-      '  **!tipnebl withdraw NEBLaddressHERE 10**\n' +
-      '  **!tipnebl private @nebliodev 10**\n' +
-      '  **!tipnebl balance**\n' +
-      '  **!tipnebl deposit**\n'
+      '  **!tipbot tip @nebliodev 10**\n' +
+      '  **!tipbot withdraw NEBLaddressHERE 10**\n' +
+      '  **!tipbot private @nebliodev 10**\n' +
+      '  **!tipbot balance**\n' +
+      '  **!tipbot deposit**\n'
     );
   }
 };
