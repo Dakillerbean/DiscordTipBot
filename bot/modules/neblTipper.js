@@ -66,32 +66,32 @@ function doHelp(message, helpmsg) {
 
 function doPrice(message) {
   var checkprice = get_json("https://api.coinmarketcap.com/v2/ticker/1955/?convert=BTC", function (resp) {
-  	var priceusd  = resp.data.quotes.USD.price;
-  	var usdchange = resp.data.quotes.USD.percent_change_24h;
-    var pricebtc  = resp.data.quotes.BTC.price;
-    var btcchange = resp.data.quotes.BTC.percent_change_24h;
+  	var priceusd  = parseFloat(resp.data.quotes.USD.price).toFixed(2);
+  	var usdchange = parseFloat(resp.data.quotes.USD.percent_change_24h).toFixed(2);
+    var pricebtc  = parseFloat(resp.data.quotes.BTC.price).toFixed(8);
+    var btcchange = parseFloat(resp.data.quotes.BTC.percent_change_24h).toFixed(2);
     var usdarrow = ""
     var btcarrow = ""
-    if (parseFloat(usdchange) > 0.00) {
+    if (usdchange > 0.00) {
       usdarrow = " :arrow_up_small: "
-    } else if (parseFloat(usdchange) > 10) {
+    } else if (usdchange > 10) {
       usdarrow = " :arrow_double_up: "
-    } else if (parseFloat(usdchange) < 0.00) {
+    } else if (usdchange < 0.00) {
       usdarrow = " :arrow_down_small: "
-    } else if (parseFloat(usdchange) < -10) {
+    } else if (usdchange < -10) {
       usdarrow = " :arrow_double_down: "
     }
 
-    if (parseFloat(btcchange) > 0.00) {
+    if (btcchange > 0.00) {
       btcarrow = " :arrow_up_small: "
-    } else if (parseFloat(btcchange) > 10) {
+    } else if (btcchange > 10) {
       btcarrow = " :arrow_double_up: "
-    } else if (parseFloat(btcchange) < 0.00) {
+    } else if (btcchange < 0.00) {
       btcarrow = " :arrow_down_small: "
-    } else if (parseFloat(btcchange) < -10) {
+    } else if (btcchange < -10) {
       btcarrow = " :arrow_double_down: "
     }
-    message.channel.send('The current price of NEBL :nebl: is: $' + priceusd + ' ' + usdarrow + usdchange + '%  -  ' + pricebtc + 'BTC :bitcoin: ' + btcarrow + btcchange + '%');
+    message.channel.send("The current price of NEBL :nebl: is: $" + priceusd + ' ' + usdarrow + usdchange + '%  -  ' + pricebtc + 'BTC :bitcoin: ' + btcarrow + btcchange + '%');
   });
 }
 
