@@ -66,10 +66,10 @@ function doHelp(message, helpmsg) {
 
 function doPrice(message) {
   var checkprice = get_json("https://api.coinmarketcap.com/v2/ticker/1955/?convert=BTC", function (resp) {
-  	var priceusd  = checkprice.data.quotes.USD.price;
-  	var usdchange = checkprice.data.quotes.USD.percent_change_24h;
-    var pricebtc  = checkprice.data.quotes.BTC.price;
-    var btcchange = checkprice.data.quotes.BTC.percent_change_24h;
+  	var priceusd  = resp.data.quotes.USD.price;
+  	var usdchange = resp.data.quotes.USD.percent_change_24h;
+    var pricebtc  = resp.data.quotes.BTC.price;
+    var btcchange = resp.data.quotes.BTC.percent_change_24h;
     var usdarrow = ""
     var btcarrow = ""
     if (parseFloat(usdchange) > 0.00) {
