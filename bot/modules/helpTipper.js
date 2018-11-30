@@ -15,6 +15,8 @@ exports.tiphelp = {
       '  **!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n' +
       '  **!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n' +
       '  **!tipbot tip private <@user> <amount>** : put private before Mentioning a user to tip them privately\n' +
+      '  **!tipbot price** : get the current price of NEBL from CMC\n' +
+      '  **!tipbot stats** : get NEBL price stats from CMC\n' +
       '__**Examples**__\n' +
       '  **!tipbot tip @nebliodev 10**\n' +
       '  **!tipbot withdraw NEBLaddressHERE 10**\n' +
