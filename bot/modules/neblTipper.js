@@ -24,7 +24,7 @@ exports.tipbot = {
         }),
       subcommand = words.length >= 2 ? words[1] : 'help',
       helpmsg =
-        '__**Neblio (NEBL) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbot** : Displays This Message\n    **!tipbot balance** : get your balance\n    **!tipbot deposit** : get address for your deposits\n    **!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbot tip private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
+        '__**Neblio (NEBL) TipBot**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbot** : Displays This Message\n    **!tipbot balance** : get your balance\n    **!tipbot deposit** : get address for your deposits\n    **!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbot tip private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
       channelwarning = 'Please use <#tipbot> or DMs to talk to TipBot.';
     switch (subcommand) {
       case 'help':
