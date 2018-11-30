@@ -91,7 +91,7 @@ function doPrice(message) {
     } else if (btcchange < -10) {
       btcarrow = " :arrow_double_down: "
     }
-    message.channel.send("The current price of NEBL :nebl: is: $" + priceusd + ' ' + usdarrow + usdchange + '%  -  ' + pricebtc + 'BTC :bitcoin: ' + btcarrow + btcchange + '%');
+    message.channel.send('The current price of NEBL :nebl:517893431058497542 is: $' + priceusd + ' ' + usdarrow + usdchange + '%  -  ' + pricebtc + 'BTC :bitcoin:517893081693945880 ' + btcarrow + btcchange + '%');
   });
 }
 
