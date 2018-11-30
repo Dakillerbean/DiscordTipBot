@@ -7,7 +7,7 @@ exports.tiphelp = {
   description: 'This commands has been changed to currency specific commands!',
   process: function(bot, message) {
     message.author.send(
-      '  **Neblio (NEBL) Tipper**\n    Transaction Fees: **' + neblioFee + '**\n' +
+      '  **Neblio (NEBL) TipBot**\n    Transaction Fees: **' + neblioFee + '**\n' +
       '__**Commands**__\n' +
       '  **!tipbot** : Displays This Message\n' +
       '  **!tipbot balance** : get your balance\n' +
