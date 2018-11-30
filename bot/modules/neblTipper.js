@@ -1,7 +1,7 @@
 'use strict';
 
 const bitcoin = require('bitcoin');
-var http = require("http");
+var https = require("https");
 
 let Regex = require('regex'),
   config = require('config'),
@@ -413,7 +413,7 @@ function addyLink(address) {
 }
 
 function get_json(url, callback) {
-  http.get(url, function(res) {
+  https.get(url, function(res) {
     var body = '';
     res.on('data', function(chunk) {
       body += chunk;
