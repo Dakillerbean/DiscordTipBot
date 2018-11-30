@@ -64,7 +64,34 @@ function doHelp(message, helpmsg) {
 }
 
 function doPrice(message) {
-	message.channel.send('Price');
+  var checkprice = get_json("https://api.coinmarketcap.com/v2/ticker/1955/?convert=BTC", function (resp) {
+  	var priceusd  = checkprice.data.quotes.USD.price;
+  	var usdchange = checkprice.data.quotes.USD.percent_change_24h;
+    var pricebtc  = checkprice.data.quotes.BTC.price;
+    var btcchange = checkprice.data.quotes.BTC.percent_change_24h;
+    var usdarrow = ""
+    var btcarrow = ""
+    if (parseFloat(usdchange) > 0.00) {
+      usdarrow = " :arrow_up_small: "
+    } else if (parseFloat(usdchange) > 10) {
+      usdarrow = " :arrow_double_up: "
+    } else if (parseFloat(usdchange) < 0.00) {
+      usdarrow = " :arrow_down_small: "
+    } else if (parseFloat(usdchange) < -10) {
+      usdarrow = " :arrow_double_down: "
+    }
+
+    if (parseFloat(btcchange) > 0.00) {
+      btcarrow = " :arrow_up_small: "
+    } else if (parseFloat(btcchange) > 10) {
+      btcarrow = " :arrow_double_up: "
+    } else if (parseFloat(btcchange) < 0.00) {
+      btcarrow = " :arrow_down_small: "
+    } else if (parseFloat(btcchange) < -10) {
+      btcarrow = " :arrow_double_down: "
+    }
+    message.channel.send('The current price of NEBL :nebl: is: $' + priceusd + ' ' + usdarrow + usdchange + '%  -  ' + pricebtc + 'BTC :bitcoin: ' + btcarrow + btcchange + '%');
+  });
 }
 
 function doBalance(message, tipper) {
@@ -382,4 +409,18 @@ function txLink(txId) {
 
 function addyLink(address) {
   return 'https://explorer.nebl.io/address/' + address;
+}
+
+function get_json(url, callback) {
+  http.get(url, function(res) {
+    var body = '';
+    res.on('data', function(chunk) {
+      body += chunk;
+    });
+
+    res.on('end', function() {
+      var response = JSON.parse(body);
+      callback(response);
+    });
+  });
 }
