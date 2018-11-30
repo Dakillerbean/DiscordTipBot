@@ -1,6 +1,7 @@
 'use strict';
 
 const bitcoin = require('bitcoin');
+var http = require("http");
 
 let Regex = require('regex'),
   config = require('config'),
