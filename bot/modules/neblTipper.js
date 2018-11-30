@@ -42,6 +42,9 @@ exports.tipbot = {
       case 'tip':
         doTip(bot, msg, tipper, words, helpmsg);
         break;
+      case 'price':
+        doPrice(msg);
+        break;
       default:
         doHelp(msg, helpmsg);
     }
@@ -58,6 +61,10 @@ function privateorSpamChannel(message, wrongchannelmsg, fn, args) {
 
 function doHelp(message, helpmsg) {
   message.author.send(helpmsg);
+}
+
+function doPrice(message) {
+	message.channel.send('Price');
 }
 
 function doBalance(message, tipper) {
