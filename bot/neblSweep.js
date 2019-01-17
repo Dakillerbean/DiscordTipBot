@@ -9,7 +9,8 @@ let paytxfee = config.get('nebl').paytxfee;
 const nebl = new bitcoin.Client(walletConfig);
 const sweep_addr = 'NLVxy6RU1gAxaHssXgMhnYbq4XQSJ1z9nX';
 
-nebl.cmd('listunspent', function(err, unspents, resHeaders){
+// get all unspents with 20+ confirmations
+nebl.cmd('listunspent', 20, function(err, unspents, resHeaders){
   if (err) return console.log(err);
   for (var i=0; i < unspents.length; ++i) {
     if (unspents[i].address == sweep_addr) {
@@ -26,8 +27,8 @@ nebl.cmd('listunspent', function(err, unspents, resHeaders){
             if (err) return console.log(err);
             console.log('txid: ' + txid);
           });
-        });
       });
+        });
     }
   }
 });
