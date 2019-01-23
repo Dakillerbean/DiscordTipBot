@@ -15,12 +15,13 @@ exports.tipbot = {
   usage: '<subcommand>',
   description:
     '__**Neblio (NEBL) TipBot**__\n\n' +
-    '**:pick:    TipBot stakes all deposits together in a staking pool.     :pick: **\n' +
-    '**:pick:    When a stake is found, TipBot divides the stake reward     :pick: **\n' +
-    '**:pick:    amongst all participating users weighted by their balance. :pick: **\n\n' +
-    '**:pick:    If you are storing large amounts in the TipBot it is       :pick: **\n' +
-    '**:pick:    HIGHLY RECOMMENDED to enable 2FA on your Discord account!  :pick: **\n\n\n' +
-    'Transaction Fees: **' + paytxfee + '**\n    ' +
+    '**:pick:    TipBot stakes all deposits together in a staking pool.**\n' +
+    '**:pick:    When a stake is found, TipBot divides the stake reward**\n' +
+    '**:pick:    amongst all participating users weighted by their balance.**\n' +
+    '**:pick:**\n' +
+    '**:pick:    If you are storing large amounts in the TipBot it is**\n' +
+    '**:pick:    HIGHLY RECOMMENDED to enable 2FA on your Discord account!**\n\n\n' +
+    'Transaction Fees: **' + paytxfee + '**\n\n    ' +
     '**!tipbot** : Displays This Message\n    ' +
     '**!tipbot balance** : get your balance\n    ' +
     '**!tipbot deposit** : get address for your deposits\n    ' +
@@ -41,12 +42,13 @@ exports.tipbot = {
       subcommand = words.length >= 2 ? words[1] : 'help',
       helpmsg =
         '__**Neblio (NEBL) TipBot**__\n\n' +
-        '**:pick:    TipBot stakes all deposits together in a staking pool.     :pick: **\n' +
-        '**:pick:    When a stake is found, TipBot divides the stake reward     :pick: **\n' +
-        '**:pick:    amongst all participating users weighted by their balance. :pick: **\n\n' +
-        '**:pick:    If you are storing large amounts in the TipBot it is       :pick: **\n' +
-        '**:pick:    HIGHLY RECOMMENDED to enable 2FA on your Discord account!  :pick: **\n\n\n' +
-        'Transaction Fees: **' + paytxfee + '**\n    ' +
+        '**:pick:    TipBot stakes all deposits together in a staking pool.**\n' +
+        '**:pick:    When a stake is found, TipBot divides the stake reward**\n' +
+        '**:pick:    amongst all participating users weighted by their balance.**\n' +
+        '**:pick:**\n' +
+        '**:pick:    If you are storing large amounts in the TipBot it is**\n' +
+        '**:pick:    HIGHLY RECOMMENDED to enable 2FA on your Discord account!**\n\n\n' +
+        'Transaction Fees: **' + paytxfee + '**\n\n    ' +
         '**!tipbot** : Displays This Message\n    ' +
         '**!tipbot balance** : get your balance\n    ' +
         '**!tipbot deposit** : get address for your deposits\n    ' +
