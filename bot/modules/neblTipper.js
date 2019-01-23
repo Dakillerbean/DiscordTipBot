@@ -14,7 +14,22 @@ exports.commands = ['tipbot'];
 exports.tipbot = {
   usage: '<subcommand>',
   description:
-    '__**Neblio (NEBL) TipBot**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbot** : Displays This Message\n    **!tipbot balance** : get your balance\n    **!tipbot deposit** : get address for your deposits\n    **!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbot tip private <user> <amount>** : put private before Mentioning a user to tip them privately.\n    **!tipbot price** : get the current price of NEBL from CMC\n    **!tipbot stats** : get NEBL price stats from CMC\n\n    has a default txfee of ' + paytxfee,
+    '__**Neblio (NEBL) TipBot**__\n\n' +
+    '**:pick:    TipBot stakes all deposits together in a staking pool.     :pick: **\n' +
+    '**:pick:    When a stake is found, TipBot divides the stake reward     :pick: **\n' +
+    '**:pick:    amongst all participating users weighted by their balance. :pick: **\n\n' +
+    '**:pick:    If you are storing large amounts in the TipBot it is       :pick: **\n' +
+    '**:pick:    HIGHLY RECOMMENDED to enable 2FA on your Discord account!  :pick: **\n\n\n' +
+    'Transaction Fees: **' + paytxfee + '**\n    ' +
+    '**!tipbot** : Displays This Message\n    ' +
+    '**!tipbot balance** : get your balance\n    ' +
+    '**!tipbot deposit** : get address for your deposits\n    ' +
+    '**!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    ' +
+    '**!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n    ' +
+    '**!tipbot tip private <user> <amount>** : put private before Mentioning a user to tip them privately.\n    ' +
+    '**!tipbot price** : get the current price of NEBL from CMC\n    ' +
+    '**!tipbot stats** : get NEBL price stats from CMC\n\n    ' +
+    '**<> : Replace with appropriate value.**',
   process: async function(bot, msg, suffix) {
     let tipper = msg.author.id.replace('!', ''),
       words = msg.content
@@ -25,7 +40,22 @@ exports.tipbot = {
         }),
       subcommand = words.length >= 2 ? words[1] : 'help',
       helpmsg =
-        '__**Neblio (NEBL) TipBot**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbot** : Displays This Message\n    **!tipbot balance** : get your balance\n    **!tipbot deposit** : get address for your deposits\n    **!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbot tip private <user> <amount>** : put private before Mentioning a user to tip them privately.\n    **!tipbot price** : get the current price of NEBL from CMC\n    **!tipbot stats** : get NEBL price stats from CMC\n\n    **<> : Replace with appropriate value.**',
+        '__**Neblio (NEBL) TipBot**__\n\n' +
+        '**:pick:    TipBot stakes all deposits together in a staking pool.     :pick: **\n' +
+        '**:pick:    When a stake is found, TipBot divides the stake reward     :pick: **\n' +
+        '**:pick:    amongst all participating users weighted by their balance. :pick: **\n\n' +
+        '**:pick:    If you are storing large amounts in the TipBot it is       :pick: **\n' +
+        '**:pick:    HIGHLY RECOMMENDED to enable 2FA on your Discord account!  :pick: **\n\n\n' +
+        'Transaction Fees: **' + paytxfee + '**\n    ' +
+        '**!tipbot** : Displays This Message\n    ' +
+        '**!tipbot balance** : get your balance\n    ' +
+        '**!tipbot deposit** : get address for your deposits\n    ' +
+        '**!tipbot withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    ' +
+        '**!tipbot tip <@user> <amount>** :mention a user with @ and then the amount to tip them\n    ' +
+        '**!tipbot tip private <user> <amount>** : put private before Mentioning a user to tip them privately.\n    ' +
+        '**!tipbot price** : get the current price of NEBL from CMC\n    ' +
+        '**!tipbot stats** : get NEBL price stats from CMC\n\n    ' +
+        '**<> : Replace with appropriate value.**',
       channelwarning = 'Please use <#tipbot> or DMs to talk to TipBot.';
     switch (subcommand) {
       case 'help':
