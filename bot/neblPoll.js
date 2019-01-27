@@ -148,7 +148,7 @@ function calc_reward() {
       console.log('done adding role');
       // all users are added to our role, send the message
       await delay(10000);
-      await client.channels.get(spamchannels[0]).send('<@&537494338800975884>', { embed: {
+      await client.channels.get('539112232173305866').send('<@&537494338800975884>', { embed: {
         thumbnail: {"url": "https://neblio-files.ams3.digitaloceanspaces.com/icons/neblio-icon-256.png"},
         description: '**:pick: TipBot Staked a New Block! - ' + stake_amount + ' NEBL! :pick:**',
         color: 1363892,
