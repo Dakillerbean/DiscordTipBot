@@ -178,7 +178,7 @@ function doDeposit(message, tipper) {
       message.reply('Error getting your Neblio (NEBL) deposit address.').then(message => message.delete(10000));
     } else {
     // add TipbotStakers role
-    var guild = client.guilds.get('403302085749112834');
+    var guild = message.client.guilds.get('403302085749112834');
     (async function addRoles() {
       try {
         var member = guild.members.get(message.author.id);
