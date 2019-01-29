@@ -177,9 +177,22 @@ function doDeposit(message, tipper) {
     if (err) {
       message.reply('Error getting your Neblio (NEBL) deposit address.').then(message => message.delete(10000));
     } else {
+    // add TipbotStakers role
+    (async function addRoles() {
+      try {
+        var member = message.member;
+        await member.addRole('537494338800975884');
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+    message.member.addRole
     message.channel.send({ embed: {
     description: '**:bank::card_index::moneybag:Neblio (NEBL) Address!:moneybag::card_index::bank:**',
     color: 1363892,
+    footer: {
+      "text": "Use the !rank TipbotStakers command to enable/disable stake notifications"
+    },
     fields: [
       {
         name: '__User__',
