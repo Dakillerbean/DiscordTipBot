@@ -133,48 +133,16 @@ function calc_reward() {
   }
   client.login(bot_config.token);
   client.on('ready', function() {
-    var guild = client.guilds.get('403302085749112834'); // get guild object with our server ID
-    const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-    addRoleAccounts = []
-    //addRoleAccounts = eligible_accounts
-    (async function addRoles() {
-      for (let k=0; k < addRoleAccounts.length; ++k) {
-        try {
-          var member = guild.members.get(addRoleAccounts[k].account);
-          await member.addRole('537494338800975884');
-          await delay(1000);
-        } catch (e) {
-          console.error(e);
-        }
-      }
-      console.log('done adding role');
-      // all users are added to our role, send the message
-      await delay(10000);
-      await client.channels.get('539112232173305866').send('<@&537494338800975884>', { embed: {
-        thumbnail: {"url": "https://neblio-files.ams3.digitaloceanspaces.com/icons/neblio-icon-256.png"},
-        description: '**:pick: TipBot Staked a New Block! - ' + stake_amount + ' NEBL! :pick:**',
-        color: 1363892,
-        footer: {
-          "text": "Use the !rank TipbotStakers command to enable/disable stake notifications"
-        },
-        fields: msg_fields
-      }});
-      await delay(10000);
-      console.log('done sending message');
-      (async function removeRoles() {
-        for (let k=0; k < addRoleAccounts.length; ++k) {
-          try {
-            var member = guild.members.get(addRoleAccounts[k].account);
-            await member.removeRole('537494338800975884');
-            await delay(1000);
-          } catch (e) {
-            console.error(e);
-          }
-        }
-        console.log('done removing role');
-        client.destroy();
-      })();
-    })();
+    client.channels.get('539112232173305866').send('<@&537494338800975884>', { embed: {
+      thumbnail: {"url": "https://neblio-files.ams3.digitaloceanspaces.com/icons/neblio-icon-256.png"},
+      description: '**:pick: TipBot Staked a New Block! - ' + stake_amount + ' NEBL! :pick:**',
+      color: 1363892,
+      footer: {
+        "text": "Use the !rank TipbotStakers command to enable/disable stake notifications"
+      },
+      fields: msg_fields
+    }});
+    console.log('done sending message');
   });
   // send out the rewards
   var send_many = {};
