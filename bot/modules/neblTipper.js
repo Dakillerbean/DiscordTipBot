@@ -5,15 +5,15 @@ const bitcoin = require('bitcoin');
 let Regex = require('regex'),
   config = require('config'),
   spamchannels = config.get('moderation').botspamchannels;
-let walletConfig = config.get('nebl').config;
-let paytxfee = config.get('nebl').paytxfee;
-const nebl = new bitcoin.Client(walletConfig);
+let walletConfig = config.get('mpc').config;
+let paytxfee = config.get('mpc').paytxfee;
+const mpc = new bitcoin.Client(walletConfig);
 
-exports.commands = ['tipnebl'];
-exports.tipnebl = {
+exports.commands = ['tipmpc'];
+exports.tipmpc = {
   usage: '<subcommand>',
   description:
-    '__**Neblio (NEBL) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipnebl** : Displays This Message\n    **!tipnebl balance** : get your balance\n    **!tipnebl deposit** : get address for your deposits\n    **!tipnebl withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipnebl <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipnebl private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    has a default txfee of ' + paytxfee,
+    '__**MicroPaymentCoin (MPC) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipmpc** : Displays This Message\n    **!tipmpc balance** : get your balance\n    **!tipmpc deposit** : get address for your deposits\n    **!tipmpc withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipmpc <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipmpc private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    has a default txfee of ' + paytxfee,
   process: async function(bot, msg, suffix) {
     let tipper = msg.author.id.replace('!', ''),
       words = msg.content
@@ -24,8 +24,8 @@ exports.tipnebl = {
         }),
       subcommand = words.length >= 2 ? words[1] : 'help',
       helpmsg =
-        '__**Neblio (NEBL) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipnebl** : Displays This Message\n    **!tipnebl balance** : get your balance\n    **!tipnebl deposit** : get address for your deposits\n    **!tipnebl withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipnebl <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipnebl private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
-      channelwarning = 'Please use <#bot-spam> or DMs to talk to bots.';
+        '__**MicroPaymentCoin (MPC) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipmpc** : Displays This Message\n    **!tipmpc balance** : get your balance\n    **!tipmpc deposit** : get address for your deposits\n    **!tipmpc withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipmpc <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipmpc private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
+      channelwarning = 'Please use <#mpc-tipbot> or DMs to talk to bots.';
     switch (subcommand) {
       case 'help':
         privateorSpamChannel(msg, channelwarning, doHelp, [helpmsg]);
@@ -58,12 +58,12 @@ function doHelp(message, helpmsg) {
 }
 
 function doBalance(message, tipper) {
-  nebl.getBalance(tipper, 1, function(err, balance) {
+  mpc.getBalance(tipper, 1, function(err, balance) {
     if (err) {
-      message.reply('Error getting Neblio (NEBL) balance.').then(message => message.delete(10000));
+      message.reply('Error getting MicroPaymentCoin (MPC) balance.').then(message => message.delete(10000));
     } else {
     message.channel.send({ embed: {
-    description: '**:bank::money_with_wings::moneybag:Neblio (NEBL) Balance!:moneybag::money_with_wings::bank:**',
+    description: '**:bank::money_with_wings::moneybag:MicroPaymentCoin (MPC) Balance!:moneybag::money_with_wings::bank:**',
     color: 1363892,
     fields: [
       {
@@ -85,10 +85,10 @@ function doBalance(message, tipper) {
 function doDeposit(message, tipper) {
   getAddress(tipper, function(err, address) {
     if (err) {
-      message.reply('Error getting your Neblio (NEBL) deposit address.').then(message => message.delete(10000));
+      message.reply('Error getting your MicroPaymentCoin (MPC) deposit address.').then(message => message.delete(10000));
     } else {
     message.channel.send({ embed: {
-    description: '**:bank::card_index::moneybag:Neblio (NEBL) Address!:moneybag::card_index::bank:**',
+    description: '**:bank::card_index::moneybag:MicroPaymentCoin (MPC) Address!:moneybag::card_index::bank:**',
     color: 1363892,
     fields: [
       {
@@ -117,24 +117,24 @@ function doWithdraw(message, tipper, words, helpmsg) {
     amount = getValidatedAmount(words[3]);
 
   if (amount === null) {
-    message.reply("I don't know how to withdraw that much Neblio (NEBL)...").then(message => message.delete(10000));
+    message.reply("I don't know how to withdraw that much MicroPaymentCoin (MPC)...").then(message => message.delete(10000));
     return;
   }
 
-  nebl.getBalance(tipper, 1, function(err, balance) {
+  mpc.getBalance(tipper, 1, function(err, balance) {
     if (err) {
-      message.reply('Error getting Neblio (NEBL) balance.').then(message => message.delete(10000));
+      message.reply('Error getting MicroPaymentCoin (MPC) balance.').then(message => message.delete(10000));
     } else {
       if (Number(amount) + Number(paytxfee) > Number(balance)) {
-        message.channel.send('Please leave atleast ' + paytxfee + ' Neblio (NEBL) for transaction fees!');
+        message.channel.send('Please leave atleast ' + paytxfee + ' MicroPaymentCoin (MPC) for transaction fees!');
         return;
       }
-      nebl.sendFrom(tipper, address, Number(amount), function(err, txId) {
+      mpc.sendFrom(tipper, address, Number(amount), function(err, txId) {
         if (err) {
           message.reply(err.message).then(message => message.delete(10000));
         } else {
         message.channel.send({embed:{
-        description: '**:outbox_tray::money_with_wings::moneybag:Neblio (NEBL) Transaction Completed!:moneybag::money_with_wings::outbox_tray:**',
+        description: '**:outbox_tray::money_with_wings::moneybag:MicroPaymentCoin (MPC) Transaction Completed!:moneybag::money_with_wings::outbox_tray:**',
         color: 1363892,
         fields: [
           {
@@ -185,16 +185,16 @@ function doTip(bot, message, tipper, words, helpmsg) {
   let amount = getValidatedAmount(words[amountOffset]);
 
   if (amount === null) {
-    message.reply("I don't know how to tip that much Neblio (NEBL)...").then(message => message.delete(10000));
+    message.reply("I don't know how to tip that much MicroPaymentCoin (MPC)...").then(message => message.delete(10000));
     return;
   }
 
-  nebl.getBalance(tipper, 1, function(err, balance) {
+  mpc.getBalance(tipper, 1, function(err, balance) {
     if (err) {
-      message.reply('Error getting Neblio (NEBL) balance.').then(message => message.delete(10000));
+      message.reply('Error getting MicroPaymentCoin (MPC) balance.').then(message => message.delete(10000));
     } else {
       if (Number(amount) + Number(paytxfee) > Number(balance)) {
-        message.channel.send('Please leave atleast ' + paytxfee + ' Neblio (NEBL) for transaction fees!');
+        message.channel.send('Please leave atleast ' + paytxfee + ' MicroPaymentCoin (MPC) for transaction fees!');
         return;
       }
 
@@ -205,7 +205,7 @@ function doTip(bot, message, tipper, words, helpmsg) {
             return;
           }
       if (message.mentions.users.first().id) {
-        sendNEBL(bot, message, tipper, message.mentions.users.first().id.replace('!', ''), amount, prv);
+        sendMPC(bot, message, tipper, message.mentions.users.first().id.replace('!', ''), amount, prv);
       } else {
         message.reply('Sorry, I could not find a user in your tip...').then(message => message.delete(10000));
       }
@@ -213,19 +213,19 @@ function doTip(bot, message, tipper, words, helpmsg) {
   });
 }
 
-function sendNEBL(bot, message, tipper, recipient, amount, privacyFlag) {
+function sendMPC(bot, message, tipper, recipient, amount, privacyFlag) {
   getAddress(recipient.toString(), function(err, address) {
     if (err) {
       message.reply(err.message).then(message => message.delete(10000));
     } else {
-          nebl.sendFrom(tipper, address, Number(amount), 1, null, null, function(err, txId) {
+          mpc.sendFrom(tipper, address, Number(amount), 1, null, null, function(err, txId) {
               if (err) {
                 message.reply(err.message).then(message => message.delete(10000));
               } else {
                 if (privacyFlag) {
                   let userProfile = message.guild.members.find('id', recipient);
                   userProfile.user.send({ embed: {
-                  description: '**:money_with_wings::moneybag:Neblio (NEBL) Transaction Completed!:moneybag::money_with_wings:**',
+                  description: '**:money_with_wings::moneybag:MicroPaymentCoin (MPC) Transaction Completed!:moneybag::money_with_wings:**',
                   color: 1363892,
                   fields: [
                     {
@@ -256,7 +256,7 @@ function sendNEBL(bot, message, tipper, recipient, amount, privacyFlag) {
                   ]
                 } });
                 message.author.send({ embed: {
-                description: '**:money_with_wings::moneybag:Neblio (NEBL) Transaction Completed!:moneybag::money_with_wings:**',
+                description: '**:money_with_wings::moneybag:MicroPaymentCoin (MPC) Transaction Completed!:moneybag::money_with_wings:**',
                 color: 1363892,
                 fields: [
                   {
@@ -288,13 +288,13 @@ function sendNEBL(bot, message, tipper, recipient, amount, privacyFlag) {
                 ]
               } });
                   if (
-                    message.content.startsWith('!tipnebl private ')
+                    message.content.startsWith('!tipmpc private ')
                   ) {
                     message.delete(1000); //Supposed to delete message
                   }
                 } else {
                   message.channel.send({ embed: {
-                  description: '**:money_with_wings::moneybag:Neblio (NEBL) Transaction Completed!:moneybag::money_with_wings:**',
+                  description: '**:money_with_wings::moneybag:MicroPaymentCoin (MPC) Transaction Completed!:moneybag::money_with_wings:**',
                   color: 1363892,
                   fields: [
                     {
@@ -332,13 +332,13 @@ function sendNEBL(bot, message, tipper, recipient, amount, privacyFlag) {
 }
 
 function getAddress(userId, cb) {
-  nebl.getAddressesByAccount(userId, function(err, addresses) {
+  mpc.getAddressesByAccount(userId, function(err, addresses) {
     if (err) {
       cb(err);
     } else if (addresses.length > 0) {
       cb(null, addresses[0]);
     } else {
-      nebl.getNewAddress(userId, function(err, address) {
+      mpc.getNewAddress(userId, function(err, address) {
         if (err) {
           cb(err);
         } else {
@@ -364,16 +364,16 @@ function isSpam(msg) {
 
 function getValidatedAmount(amount) {
   amount = amount.trim();
-  if (amount.toLowerCase().endsWith('nebl')) {
+  if (amount.toLowerCase().endsWith('mpc')) {
     amount = amount.substring(0, amount.length - 3);
   }
   return amount.match(/^[0-9]+(\.[0-9]+)?$/) ? amount : null;
 }
 
 function txLink(txId) {
-  return 'https://explorer.nebl.io/tx/' + txId;
+  return 'http://explorer.micropaymentcoin.com/tx/' + txId;
 }
 
 function addyLink(address) {
-  return 'https://explorer.nebl.io/address/' + address;
+  return 'http://explorer.micropaymentcoin.com/address/' + address;
 }
