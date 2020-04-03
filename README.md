@@ -1,20 +1,10 @@
 # Bot for Discord communities to facilitate crypto coin tipping!
-(This README will be updated along with bot updates)
 
 Features:
 - Tipbot for any coin running the bitcoind client.
     - Help message `!tip`.
 - Dynamic plugin loading with permission support.
-- **out of the box Supported Coins**
-    - Dogecoin (DOGE)
-    - Ravencoin (RVN)
-    - LBRY Credits (LBC)
-    - Uniform Fiscal Object (UFO)
-    - ~~Proton (PROTON)~~ Phase(PHASE)
-    - Phoenixcoin (PXC)
-    - Feathercoin (FTC)
-    - Vertical (VTL)
-    - Neblio (NEBL)
+- This fork only works with MicroPaymentCoin!!!
 
 
 ## Create a Bot
