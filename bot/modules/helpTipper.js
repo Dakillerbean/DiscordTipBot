@@ -8,7 +8,7 @@ let ufoFee = config.get('ufo').paytxfee;
 let phoenixFee = config.get('pxc').paytxfee;
 let featherFee = config.get('ftc').paytxfee;
 let verticalFee = config.get('vtl').paytxfee;
-let neblioFee = config.get('nebl').paytxfee;
+let micropaymentcoinFee = config.get('mpc').paytxfee;
 exports.commands = ['tiphelp'];
 exports.tiphelp = {
   usage: '<subcommand>',
@@ -16,15 +16,7 @@ exports.tiphelp = {
   process: function(bot, message) {
     message.author.send(
       '__**:bank: Coins :bank:**__\n' +
-      '  **Ravencoin (RVN) Tipper**\n    Transaction Fees: **' + ravenFee + '**\n' +
-      '  **Dogecoin (DOGE) Tipper**\n    Transaction Fees: **' + dogeFee + '**\n' +
-      '  **LBRY Credit (LBC) Tipper**\n    Transaction Fees: **' + lbryFee + '**\n' +
-      '  **Phase (PHASE) Tipper**\n    Transaction Fees: **' + phaseFee + '**\n' +
-      '  **Uniform Fiscal Object (UFO) Tipper**\n    Transaction Fees: **' + ufoFee + '**\n' +
-      '  **Phoenixcoin (PXC) Tipper**\n    Transaction Fees: **' + phoenixFee + '**\n' +
-      '  **Feathercoin (FTC) Tipper**\n    Transaction Fees: **' + featherFee + '**\n' +
-      '  **Vertical (VTL) Tipper**\n    Transaction Fees: **' + verticalFee + '**\n' +
-      '  **Neblio (NEBL) Tipper**\n    Transaction Fees: **' + neblioFee + '**\n' +
+      '  **MicroPaymentCoin (MPC) Tipper**\n    Transaction Fees: **' + micropaymentcoinFee + '**\n' +
       '__**Commands**__\n' +
       '  **!tip<CoinSymbol>** : Displays This Message\n' +
       '  **!tip<CoinSymbol> balance** : get your balance\n' +
@@ -34,11 +26,11 @@ exports.tiphelp = {
       '  **!tip<CoinSymbol> private <user> <amount>** : put private before Mentioning a user to tip them privately\n' +
       '**<> : Replace carrot <> symbole with appropriate value.**\n' +
       '__**Examples**__\n' +
-      '  **!tiprvn @MSFTserver 10**\n' +
-      '  **!tipdoge withdraw DOGEaddressHERE 10**\n' +
-      '  **!tipftc private @MSFTserver 10**\n' +
-      '  **!tiplbc balance**\n' +
-      '  **!tippxc deposit**\n'
+      '  **!tipmpc @Username 10**\n' +
+      '  **!tipmpc withdraw MPCaddressHERE 10**\n' +
+      '  **!tipmpc private @Username 10**\n' +
+      '  **!tipmpc balance**\n' +
+      '  **!tipmpc deposit**\n'
     );
   }
 };
