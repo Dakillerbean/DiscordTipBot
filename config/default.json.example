@@ -77,8 +77,16 @@
       "pass": "Do-Not-Use-This-Password-Youll-Be-Hacked-For-all-Teh-Moneys!"
     }
   },
+  "mpc": {
+    "paytxfee": .1,
+    "config": {
+      "port": 3343,
+      "user": "RPC_MPC",
+      "pass": "Do-Not-Use-This-Password-Youll-Be-Hacked-For-all-Teh-Moneys!"
+    }
+  },
   "moderation":{
-  "pm2Name": "TipBot",
+  "pm2Name": "MPC TipBot",
    // Roles that have access to all commands.
   "perms": ["Admin","Moderator","Community Leader","Bots"],
   // Bot Devs!
