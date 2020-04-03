@@ -19,9 +19,9 @@ exports.tiphelp = {
       '  **MicroPaymentCoin (MPC) Tipper**\n    Transaction Fees: **' + micropaymentcoinFee + '**\n' +
       '__**Commands**__\n' +
       '  **!tip<CoinSymbol>** : Displays This Message\n' +
-      '  **!tip<CoinSymbol> balance** : get your balance\n' +
-      '  **!tip<CoinSymbol> deposit** : get address for your deposits\n' +
-      '  **!tip<CoinSymbol> withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n' +
+      '  **!tip<CoinSymbol> balance** : get your MPC balance\n' +
+      '  **!tip<CoinSymbol> deposit** : get address for your MPC deposits\n' +
+      '  **!tip<CoinSymbol> withdraw <ADDRESS> <AMOUNT>** : withdraw MPC coins to specified address\n' +
       '  **!tip<CoinSymbol> <@user> <amount>** :mention a user with @ and then the amount to tip them\n' +
       '  **!tip<CoinSymbol> private <user> <amount>** : put private before Mentioning a user to tip them privately\n' +
       '**<> : Replace carrot <> symbole with appropriate value.**\n' +
